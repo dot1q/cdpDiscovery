@@ -1,0 +1,16 @@
+<div>
+    <div uib-alert ng-repeat="alert in ctrl.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+    <div class="cdp-view">
+        <div ng-if="!ctrl.loaded">
+            <center>
+                <img src="/assets/jimmy.jpg"></img>
+                <h3>Six CDP Pulls ahead of us, Jimmy</h3>
+            </center>
+        </div>
+        <div ng-if="ctrl.loaded">
+            <vis-network data="ctrl.data" options="ctrl.options" events="ctrl.events"></vis-network>
+        </div>
+    </div>
+    <div id="dashboardMapLegend"></div>
+</div>
+
