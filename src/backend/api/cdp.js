@@ -16,10 +16,16 @@ const v1Api = ({options}, app) => {
                     let edges = [];
 
                     for(let node in data) {
+                        let swVersion = null;
+                        if(data[node].swVersion !== undefined && data[node].swVersion !== null){
+                            swVersion = chunk(data[node].swVersion, 100).join('<br />');
+                        }
+                        
                         nodes.push({
                             id: node, 
-                            label: data[node].hostName + '\r' + data[node].ipAddr,
-                            shape: 'box'
+                            label: data[node].hostName + '\r' + data[node].ipAddr ,
+                            shape: 'box',
+                            title: swVersion
                         });
 
                         if(data[node].neighbors !== undefined) {
@@ -71,6 +77,18 @@ const findInterface = (obj2search, hostname) => {
     return "Unknown";
     
 }
+
+const chunk = (str, n) => {
+    var ret = [];
+    var i;
+    var len;
+
+    for(i = 0, len = str.length; i < len; i += n) {
+       ret.push(str.substr(i, n))
+    }
+    return ret
+};
+
 
 
 export {v1Api};
